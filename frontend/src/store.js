@@ -12,17 +12,23 @@ import {
   userUpdateProfileReducer,
 } from './reducers/userReducer'
 
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducer'
+
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
   : []
 
 const userInfoFromLocalStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
-    : null
+  : null
 
 const shippingAddressFromLocalStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress'))
-  : {}   
+  : {}
+
+const paymentMethodFromLocalStorage = localStorage.getItem('paymentMethod')
+  ? JSON.parse(localStorage.getItem('paymentMethod'))
+  : ''
 
 const store = configureStore({
   reducer: {
@@ -33,11 +39,16 @@ const store = configureStore({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
+    orderListMy: orderListMyReducer,
   },
   preloadedState: {
     cart: {
       cartItems: cartItemsFromLocalStorage,
       shippingAddress: shippingAddressFromLocalStorage,
+      paymentMethod: paymentMethodFromLocalStorage,
     },
     userLogin: { userInfo: userInfoFromLocalStorage },
   },

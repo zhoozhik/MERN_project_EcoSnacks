@@ -19,7 +19,7 @@ import Message from '../components/Message'
 
 
 
-const ProductScreen = ({}) => {
+const ProductScreen = () => {
   const navigate =useNavigate()
   const [qty, setQty] = useState(1)
   const params = useParams();
