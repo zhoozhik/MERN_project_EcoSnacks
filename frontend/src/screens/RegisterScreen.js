@@ -57,6 +57,7 @@ const RegisterScreen = () => {
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type='email'
+            maxLength={70}
             placeholder='Enter email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -66,6 +67,8 @@ const RegisterScreen = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
+            maxLength={70}
+            minLength={6}
             placeholder='Enter password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -75,6 +78,8 @@ const RegisterScreen = () => {
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
+            maxLength={70}
+            minLength={6}
             placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}

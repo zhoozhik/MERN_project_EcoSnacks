@@ -39,6 +39,7 @@ const LoginScreen = () => {
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
+            maxLength={70}
             type='email'
             placeholder='Enter email'
             value={email}
@@ -48,6 +49,8 @@ const LoginScreen = () => {
         <Form.Group controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
+            maxLength={70}
+            minLength={6}
             type='password'
             placeholder='Enter password'
             value={password}
