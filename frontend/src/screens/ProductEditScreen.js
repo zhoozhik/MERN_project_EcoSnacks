@@ -4,8 +4,9 @@ import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProductDetails } from '../actioins/productActions'
+import { listProductDetails, updateProduct } from '../actioins/productActions'
 import FormContainer from '../components/FormContainer'
+import { PRODUCT_UPDATE_RESET} from '../constants/productConstants'
 
 const ProductEditScreen = () => {
   const params = useParams()
@@ -23,30 +24,46 @@ const ProductEditScreen = () => {
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
 
-  //   const productUpdate = useSelector((state) => state.productUpdate)
-  //   const {
-  //     loading: loadingUpdate,
-  //     error: errorUpdate,
-  //     success: successUpdate,
-  //   } = productUpdate
+  const productUpdate = useSelector((state) => state.productUpdate)
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate
 
   useEffect(() => {
-    if (product.name || product._id !== productId) {
-      dispatch(listProductDetails(productId))
+    if (successUpdate) {
+        dispatch({ type: PRODUCT_UPDATE_RESET })
+      navigate('/admin/productlist')
     } else {
-      setName(product.name)
-      setPrice(product.email)
-      setDescription(product.description)
-      setImage(product.image)
-      setBrand(product.brand)
-      setCategory(product.category)
-      setCountInStock(product.countInStock)
+      if (!product.name || product._id !== productId) {
+        dispatch(listProductDetails(productId))
+      } else {
+        setName(product.name)
+        setPrice(product.price)
+        setDescription(product.description)
+        setImage(product.image)
+        setBrand(product.brand)
+        setCategory(product.category)
+        setCountInStock(product.countInStock)
+      }
     }
-  }, [product, productId, dispatch ])
+  }, [product, productId, dispatch, successUpdate])
 
   const submitHandler = (e) => {
     e.preventDefault()
-  // update Product
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        description,
+        image,
+        brand,
+        category,
+        countInStock,
+      })
+    )
   }
 
   return (
@@ -56,8 +73,8 @@ const ProductEditScreen = () => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-        {/* {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -87,8 +104,8 @@ const ProductEditScreen = () => {
               <Form.Control
                 type='text'
                 placeholder='Enter image url'
-                checked={image}
-                onChange={(e) => setImage(e.target.checked)}
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='brand' className='mt-2'>
@@ -96,8 +113,8 @@ const ProductEditScreen = () => {
               <Form.Control
                 type='text'
                 placeholder='Enter brand'
-                checked={brand}
-                onChange={(e) => setBrand(e.target.checked)}
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='category' className='mt-2'>
@@ -105,8 +122,8 @@ const ProductEditScreen = () => {
               <Form.Control
                 type='text'
                 placeholder='Enter category'
-                checked={category}
-                onChange={(e) => setCategory(e.target.checked)}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='countInStock' className='mt-2'>
@@ -114,16 +131,16 @@ const ProductEditScreen = () => {
               <Form.Control
                 type='number'
                 placeholder='Enter count in Stock'
-                checked={countInStock}
-                onChange={(e) => setCountInStock(e.target.checked)}
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
               ></Form.Control>
               <Form.Group controlId='description' className='mt-2'>
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='Enter description'
-                  checked={description}
-                  onChange={(e) => setDescription(e.target.checked)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
             </Form.Group>
