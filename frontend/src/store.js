@@ -18,7 +18,7 @@ import {
   userUpdateReducer
 } from './reducers/userReducer'
 
-import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducer'
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer, ordersListReducer, orderDeliverReducer } from './reducers/orderReducer'
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -54,7 +54,9 @@ const store = configureStore({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
+    orderDeliver: orderDeliverReducer,
     orderListMy: orderListMyReducer,
+    ordersList: ordersListReducer
   },
   preloadedState: {
     cart: {
