@@ -50,7 +50,7 @@ const ShippingScreen = () => {
         <Form.Group controlId='postalcode' className='mt-2'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
-            type='text'
+            type='number'
             placeholder='Enter postal code'
             value={postalCode}
             required

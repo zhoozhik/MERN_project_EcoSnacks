@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import logo from '../logo.png'
 import { logout } from '../actioins/userAction'
+import SearchBox from './SearchBox'
 
 
 const Header = () => {
@@ -27,10 +28,12 @@ const Header = () => {
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <SearchBox/>
             <Nav className='ms-auto'>
-              <Nav.Link as={Link} to='/cart'>
-                <i className='fas fa-shopping-cart'></i> Cart
-              </Nav.Link>
+              {userInfo  && (
+                <Nav.Link as={Link} to='/cart'>
+                  <i className='fas fa-shopping-cart'></i> Cart
+                </Nav.Link>)}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username'>
                   <NavDropdown.Item as={Link} to='/profile'>

@@ -1,5 +1,5 @@
 import { AccordionButton } from 'react-bootstrap'
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR_ITEMS, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartConstants'
 
 export const cartReducer = (
          state = { cartItems: [], shippingAddress:{} },
@@ -41,6 +41,11 @@ export const cartReducer = (
              return {
                ...state,
                paymentMethod: action.payload,
+             }
+           case CART_CLEAR_ITEMS:
+             return {
+               ...state,
+               cartItems: []
              }
            default:
              return state

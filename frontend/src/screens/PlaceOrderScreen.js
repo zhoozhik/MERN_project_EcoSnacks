@@ -6,6 +6,7 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import Message from '../components/Message'
 import { createOrder } from '../actioins/orderActions'
 
+
 const PlaceOrderScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -29,10 +30,12 @@ const PlaceOrderScreen = () => {
 
   useEffect(() => {
     if (success) {
-                   navigate(`/order/${order._id}`)
+   
+      navigate(`/order/${order._id}`)
+      
                    // eslint-disable-next-line
                  } 
-  }, [success])
+  }, [success, dispatch])
 
   const placeOrderHandler = () => {
     dispatch(
@@ -46,6 +49,7 @@ const PlaceOrderScreen = () => {
         totalPrice: cart.totalPrice,
       })
     )
+   
   }
   return (
     <>

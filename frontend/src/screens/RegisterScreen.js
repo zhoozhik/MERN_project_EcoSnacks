@@ -101,4 +101,4 @@ const RegisterScreen = () => {
     </FormContainer>
   )
 }
-export default RegisterScreen
+export default RegisterScreen  

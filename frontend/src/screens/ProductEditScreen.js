@@ -113,6 +113,7 @@ const ProductEditScreen = () => {
               <Form.Control
                 type='name'
                 placeholder='Enter name'
+                maxLength={150}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></Form.Control>
@@ -145,6 +146,7 @@ const ProductEditScreen = () => {
               <Form.Label>Brand</Form.Label>
               <Form.Control
                 type='text'
+                maxLength={150}
                 placeholder='Enter brand'
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
@@ -154,6 +156,7 @@ const ProductEditScreen = () => {
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type='text'
+                maxLength={150}
                 placeholder='Enter category'
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -171,6 +174,7 @@ const ProductEditScreen = () => {
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   type='text'
+                  maxLength={1000}
                   placeholder='Enter description'
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
