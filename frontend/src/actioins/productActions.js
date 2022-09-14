@@ -18,6 +18,9 @@ import {
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_REQUEST,
   PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_TOP_FAIL,
+  PRODUCT_TOP_SUCCESS,
+  PRODUCT_TOP_REQUEST,
 } from '../constants/productConstants'
 
 export const listProducts = (keyword='', pageNumber='') => async (dispatch) => {
@@ -190,6 +193,31 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
   } catch (error) {
     dispatch({
       type: PRODUCT_CREATE_REVIEW_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listTopProducts = (keyword = '', pageNumber = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: PRODUCT_TOP_REQUEST })
+
+    const { data } = await axios.get(
+      `/api/products/top`
+    )
+
+    dispatch({
+      type: PRODUCT_TOP_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_TOP_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
